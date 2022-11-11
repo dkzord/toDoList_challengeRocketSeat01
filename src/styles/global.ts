@@ -10,6 +10,8 @@ const GlobalStyle = createGlobalStyle`
 
     --color-danger: #E25858;
 
+    --color-white: #fff;
+
     --color-gray-100: #F2F2F2;
     --color-gray-200: #D9D9D9;
     --color-gray-300: #808080;
@@ -34,6 +36,10 @@ const GlobalStyle = createGlobalStyle`
   body, input, button, textarea {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
+  }
+
+  button {
+    cursor: pointer;
   }
 
 `;
