@@ -5,6 +5,7 @@ import Clipboard from '../../assets/images/Clipboard.svg';
 
 export default function Body() {
   const tarefas = 5;
+  const itemTrue = true;
 
   return (
     <S.Container>
@@ -25,18 +26,22 @@ export default function Body() {
             <span>2 de 5</span>
           </S.TaskComplete>
         </S.Info>
-        <S.TaskListVoid>
-          <div>
-            <div className="alignIcon">
-              <S.Image src={Clipboard} alt="Clipboard" />
-            </div>
+        {itemTrue === true ? (
+          <S.TaskListVoid>
+            <div>
+              <div className="alignIcon">
+                <S.Image src={Clipboard} alt="Clipboard" />
+              </div>
 
-            <div className="settinStyle">
-              <div>Você ainda não tem tarefas cadastradas</div>
-              <div>Crie tarefas e organize seus itens a fazer</div>
+              <div className="settinStyle">
+                <div>Você ainda não tem tarefas cadastradas</div>
+                <div>Crie tarefas e organize seus itens a fazer</div>
+              </div>
             </div>
-          </div>
-        </S.TaskListVoid>
+          </S.TaskListVoid>
+        ) : (
+          <h1>vazio</h1>
+        )}
       </S.ContainerWidth>
     </S.Container>
   );
