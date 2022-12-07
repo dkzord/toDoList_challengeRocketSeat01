@@ -9,15 +9,17 @@ export const Container = styled.div`
 export const ContainerWidth = styled.div``;
 
 export const Search = styled.div`
-  display: block;
+  display: flex;
   margin-top: -1.6875rem;
-  max-width: 750px;
+  max-width: 46.875rem;
+
+  justify-content: space-between;
 `;
 
 export const Input = styled.input`
   background: var(--color-gray-500);
   border: none;
-  width: 39.875rem;
+  width: 53.875rem;
   height: 3.375rem;
   border-radius: 8px;
   padding: 1rem;
@@ -46,6 +48,7 @@ export const Info = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 4rem;
+  margin-bottom: 1.875rem;
 `;
 
 export const TaskCreate = styled.span`

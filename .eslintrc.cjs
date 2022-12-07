@@ -34,5 +34,6 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/button-has-type': 'off',
     '@typescript-eslint/no-shadow': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
   },
 };

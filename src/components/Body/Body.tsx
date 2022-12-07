@@ -1,11 +1,13 @@
 import { PlusCircle } from 'phosphor-react';
+import { useState } from 'react';
+import ItemList from './ItemList/ItemList';
 import * as S from './styles';
 
 import Clipboard from '../../assets/images/Clipboard.svg';
 
 export default function Body() {
   const tarefas = 5;
-  const itemTrue = true;
+  const [varify, setVerify] = useState(true);
 
   return (
     <S.Container>
@@ -26,7 +28,7 @@ export default function Body() {
             <span>2 de 5</span>
           </S.TaskComplete>
         </S.Info>
-        {itemTrue === true ? (
+        {varify === false ? (
           <S.TaskListVoid>
             <div>
               <div className="alignIcon">
@@ -40,7 +42,7 @@ export default function Body() {
             </div>
           </S.TaskListVoid>
         ) : (
-          <h1>vazio</h1>
+          <ItemList />
         )}
       </S.ContainerWidth>
     </S.Container>
