@@ -2,10 +2,11 @@
 import { Trash } from 'phosphor-react';
 
 import * as S from './styles';
+import { IItemProps } from './typing';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 interface taskProps {
-  data: any;
+  data: IItemProps;
   deleteTask: (id: string) => void;
   completeTask: (id: string) => void;
 }
