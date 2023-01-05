@@ -18,6 +18,7 @@ export const Container = styled.div`
 
 export const ContainerWidth = styled.div`
   display: flex;
+  width: 100vw;
   margin: 1rem 0;
 `;
 

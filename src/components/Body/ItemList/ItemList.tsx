@@ -1,14 +1,11 @@
+/* eslint-disable array-callback-return */
 import { Trash } from 'phosphor-react';
 import { useState } from 'react';
 
 import * as S from './styles';
 
-export default function ItemList() {
-  const [isCompleted, setIsCompleted] = useState(false);
-
-  function handleCheckbox() {
-    setIsCompleted(!isCompleted);
-  }
+export default function ItemList({ data }: any) {
+  const [completed, setCompleted] = useState(false);
 
   return (
     <S.Container>
@@ -17,13 +14,10 @@ export default function ItemList() {
           type="checkbox"
           name="readCheckbox"
           id="readCheckbox"
-          readOnly
-          onClick={() => handleCheckbox}
+          checked={completed}
+          onChange={() => setCompleted(!completed)}
         />
-        <S.TextContent>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
-        </S.TextContent>
+        <S.TextContent>{data.title}</S.TextContent>
       </S.ContainerWidth>
       <S.Button>
         <Trash size={22} />

@@ -1,34 +1,73 @@
 import { PlusCircle } from 'phosphor-react';
 import { useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import ItemList from './ItemList/ItemList';
 import * as S from './styles';
 
 import Clipboard from '../../assets/images/Clipboard.svg';
 
+interface Task {
+  id: string;
+  title: string;
+  isComplete: boolean;
+}
+
 export default function Body() {
-  const tarefas = 5;
-  const [varify, setVerify] = useState(true);
+  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [arrayTasks, setArrayTasks] = useState<Task[]>([]);
+
+  function handleCreateNewTask() {
+    if (!newTaskTitle) return;
+
+    const id = uuid();
+
+    const newTask = {
+      id,
+      title: newTaskTitle,
+      isComplete: false,
+    };
+
+    setArrayTasks([...arrayTasks, newTask]);
+    setNewTaskTitle('');
+  }
+
+  function handleDeleteTask(id: string) {
+    const newArray = arrayTasks.filter(task => task.id !== id);
+    setArrayTasks(newArray);
+  }
 
   return (
     <S.Container>
       <S.ContainerWidth>
         <S.Search>
-          <S.Input type="text" placeholder="Adicione uma nova tarefa" />
-          <S.Button type="submit">
+          <S.Input
+            type="text"
+            placeholder="Adicione uma nova tarefa"
+            onChange={e => setNewTaskTitle(e.target.value)}
+          />
+          <S.Button type="submit" onClick={() => handleCreateNewTask()}>
             Criar
             <PlusCircle size={15} />
           </S.Button>
         </S.Search>
         <S.Info>
           <S.TaskCreate>
-            Tarefas criadas <span>{tarefas}</span>
+            Tarefas criadas <span>{arrayTasks.length}</span>
           </S.TaskCreate>
           <S.TaskComplete>
             Concluídas
-            <span>2 de 5</span>
+            <span>2 de {arrayTasks.length}</span>
           </S.TaskComplete>
         </S.Info>
-        {varify === false ? (
+        {arrayTasks.length > 0 ? (
+          arrayTasks.map(task => (
+            <ItemList
+              key={task.id}
+              data={task}
+              handleDeleteTask={() => handleDeleteTask}
+            />
+          ))
+        ) : (
           <S.TaskListVoid>
             <div>
               <div className="alignIcon">
@@ -41,8 +80,6 @@ export default function Body() {
               </div>
             </div>
           </S.TaskListVoid>
-        ) : (
-          <ItemList />
         )}
       </S.ContainerWidth>
     </S.Container>
