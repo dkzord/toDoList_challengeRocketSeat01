@@ -1,20 +1,27 @@
 /* eslint-disable array-callback-return */
 import { Trash } from 'phosphor-react';
-import { useState } from 'react';
 
 import * as S from './styles';
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-interface handleDeleteTaskProps {
+interface taskProps {
   data: any;
-  handleDeleteTask: (id: string) => void;
+  deleteTask: (id: string) => void;
+  completeTask: (id: string) => void;
 }
 
 export default function ItemList({
   data,
-  handleDeleteTask,
-}: handleDeleteTaskProps) {
-  const [completed, setCompleted] = useState(false);
+  deleteTask,
+  completeTask,
+}: taskProps) {
+  function handleDeleteTask(id: string) {
+    deleteTask(id);
+  }
+
+  function handleCompleteTask(id: string) {
+    completeTask(id);
+  }
 
   return (
     <S.Container>
@@ -23,10 +30,10 @@ export default function ItemList({
           type="checkbox"
           name="readCheckbox"
           id="readCheckbox"
-          checked={completed}
-          onChange={() => setCompleted(!completed)}
+          checked={data.isComplete}
+          onChange={() => handleCompleteTask(data.id)}
         />
-        <S.TextContent className={completed ? 'completedTask' : ''}>
+        <S.TextContent className={data.isComplete ? 'completedTask' : ''}>
           {data.title}
         </S.TextContent>
       </S.ContainerWidth>

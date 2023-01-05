@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react/jsx-no-bind */
 import { PlusCircle } from 'phosphor-react';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -31,11 +33,32 @@ export default function Body() {
     setNewTaskTitle('');
   }
 
-  function handleDeleteTask(id: string) {
-    console.log('entrou aqui');
-
+  function deleteTask(id: string) {
     const newArray = arrayTasks.filter(task => task.id !== id);
     setArrayTasks(newArray);
+  }
+
+  function completeTask(id: string) {
+    const newArray = arrayTasks.map(task => {
+      if (task.id === id) {
+        // eslint-disable-next-line no-param-reassign
+        task.isComplete = !task.isComplete;
+      }
+      return task;
+    });
+
+    setArrayTasks(newArray);
+  }
+
+  function countCompleteTask() {
+    let count = 0;
+
+    arrayTasks.filter(task => {
+      if (task.isComplete === true) {
+        count += 1;
+      }
+    });
+    return count;
   }
 
   return (
@@ -58,7 +81,9 @@ export default function Body() {
           </S.TaskCreate>
           <S.TaskComplete>
             Concluídas
-            <span>2 de {arrayTasks.length}</span>
+            <span>
+              {countCompleteTask()} de {arrayTasks.length}
+            </span>
           </S.TaskComplete>
         </S.Info>
         {arrayTasks.length > 0 ? (
@@ -66,7 +91,8 @@ export default function Body() {
             <ItemList
               key={task.id}
               data={task}
-              handleDeleteTask={() => handleDeleteTask}
+              deleteTask={deleteTask}
+              completeTask={completeTask}
             />
           ))
         ) : (
