@@ -24,6 +24,11 @@ export const ContainerWidth = styled.div`
 
 export const TextContent = styled.span`
   size: 0.875rem;
+
+  &.completedTask {
+    text-decoration: line-through;
+    opacity: 0.6;
+  }
 `;
 
 export const Button = styled.button`

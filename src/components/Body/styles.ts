@@ -37,11 +37,16 @@ export const Button = styled.button`
   color: var(--color-white);
   font-size: 700;
   border: none;
+  transition: filter 0.2s;
 
   svg {
     margin-left: 0.3rem;
     line-height: 0;
     border: none;
+  }
+
+  &:hover {
+    filter: brightness(0.85);
   }
 `;
 

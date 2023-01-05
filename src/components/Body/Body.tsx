@@ -17,7 +17,7 @@ export default function Body() {
   const [arrayTasks, setArrayTasks] = useState<Task[]>([]);
 
   function handleCreateNewTask() {
-    if (!newTaskTitle) return;
+    if (!newTaskTitle || /^\s*$/.test(newTaskTitle)) return;
 
     const id = uuid();
 
@@ -32,6 +32,8 @@ export default function Body() {
   }
 
   function handleDeleteTask(id: string) {
+    console.log('entrou aqui');
+
     const newArray = arrayTasks.filter(task => task.id !== id);
     setArrayTasks(newArray);
   }

@@ -4,7 +4,16 @@ import { useState } from 'react';
 
 import * as S from './styles';
 
-export default function ItemList({ data }: any) {
+// eslint-disable-next-line @typescript-eslint/naming-convention
+interface handleDeleteTaskProps {
+  data: any;
+  handleDeleteTask: (id: string) => void;
+}
+
+export default function ItemList({
+  data,
+  handleDeleteTask,
+}: handleDeleteTaskProps) {
   const [completed, setCompleted] = useState(false);
 
   return (
@@ -17,9 +26,11 @@ export default function ItemList({ data }: any) {
           checked={completed}
           onChange={() => setCompleted(!completed)}
         />
-        <S.TextContent>{data.title}</S.TextContent>
+        <S.TextContent className={completed ? 'completedTask' : ''}>
+          {data.title}
+        </S.TextContent>
       </S.ContainerWidth>
-      <S.Button>
+      <S.Button onClick={() => handleDeleteTask(data.id)}>
         <Trash size={22} />
       </S.Button>
     </S.Container>
